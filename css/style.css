@@ -1,0 +1,1361 @@
+/* =====================================================
+   KYLAND / PURINLAND
+   Y2K JAPANESE PERSONAL HOMEPAGE
+   TEAL + BROWN + PINK
+   ===================================================== */
+
+
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+
+body {
+    margin: 0;
+
+    background:
+        url("../images/strawberry-bg.png");
+
+    color: #5a3932;
+
+    font-family:
+        "Trebuchet MS",
+        Arial,
+        sans-serif;
+
+    font-size: 13px;
+}
+
+.lace-frame {
+    position: relative;
+
+    width: 1050px;
+    max-width: calc(100% - 30px);
+
+    margin: 25px auto;
+    padding: 0;
+
+    background: transparent;
+
+    box-sizing: border-box;
+}
+
+.website {
+    position: relative;
+
+    width: 100%;
+    max-width: none;
+
+    margin: 0;
+    padding: 0;
+
+    background: #fffaf7;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================
+   LACE
+========================= */
+
+.lace-top {
+    position: absolute;
+
+    top: -11px;
+    left: 0;
+    right: 0;
+
+    height: 23px;
+
+    background-image: url("../images/f-ue2.gif");
+    background-repeat: repeat-x;
+    background-position: center;
+
+    z-index: 10;
+
+    pointer-events: none;
+}
+
+
+.lace-bottom {
+    position: absolute;
+
+    bottom: -11px;
+    left: 0;
+    right: 0;
+
+    height: 23px;
+
+    background-image: url("../images/f-sita2.gif");
+    background-repeat: repeat-x;
+    background-position: center;
+
+    z-index: 10;
+
+    pointer-events: none;
+}
+
+
+.lace-left {
+    position: absolute;
+
+    top: 0;
+    bottom: 0;
+    left: -11px;
+
+    width: 23px;
+
+    background-image: url("../images/f-hidari2.gif");
+    background-repeat: repeat-y;
+    background-position: center;
+
+    z-index: 10;
+
+    pointer-events: none;
+}
+
+
+.lace-right {
+    position: absolute;
+
+    top: 0;
+    bottom: 0;
+    right: -11px;
+
+    width: 23px;
+
+    background-image: url("../images/f-migi2.gif");
+    background-repeat: repeat-y;
+    background-position: center;
+
+    z-index: 10;
+
+    pointer-events: none;
+}
+
+.lace-corner {
+    position: absolute;
+
+    width: 23px;
+    height: 23px;
+
+    background-repeat: no-repeat;
+    background-position: center;
+
+    z-index: 20;
+
+    pointer-events: none;
+}
+
+.lace-tl {
+    top: -11px;
+    left: -11px;
+    background-image: url("../images/f-kado12.gif");
+}
+
+.lace-tr {
+    top: -11px;
+    right: -11px;
+    background-image: url("../images/f-kado22.gif");
+}
+
+.lace-bl {
+    bottom: -11px;
+    left: -11px;
+    background-image: url("../images/f-kado32.gif");
+}
+
+.lace-br {
+    bottom: -11px;
+    right: -11px;
+    background-image: url("../images/f-kado42.gif");
+}
+
+
+.welcome-gif {
+
+    display: block;
+
+    max-width: 180px;
+
+    margin: 0 auto 8px;
+}
+
+.header-links {
+
+    margin-top: 12px;
+
+    color: #f9d6e1;
+
+    font-size: 11px;
+
+    letter-spacing: 1px;
+}
+
+@font-face {
+    font-family: "Cookiemonster";
+    src: url("../fonts/Cookiemonster.ttf") format("opentype");
+    font-weight: normal;
+    font-style: italic;
+}
+
+.header {
+    min-height: 150px;
+
+    padding: 25px 20px 18px;
+
+    text-align: center;
+
+    background:
+        repeating-linear-gradient(
+            90deg,
+            #dff3f1 0px,
+            #dff3f1 7px,
+            #f8dce5 7px,
+            #f8dce5 10px,
+            #ffffff 10px,
+            #ffffff 17px
+        );
+
+    border-bottom: 5px solid #70463c;
+
+    position: relative;
+}
+
+.site-title {
+    margin: 5px 0 12px;
+
+    font-family: "Cookiemonster", cursive;
+    font-size: 65px;
+    font-weight: normal;
+    font-style: normal;
+    text-align: left;
+
+    color: #ff58b7;
+
+    letter-spacing: 1px;
+
+    text-shadow:
+        2px 2px 0 #ffffff,
+        3px 3px 0 #f1b1c8;
+}
+
+.subtitle {
+    color: #70463c;
+    text-align: left;
+
+    font-family: Georgia, serif;
+
+    font-size: 14px;
+
+    font-weight: bold;
+}
+
+.header-decoration {
+    color: #e58eaa;
+
+    font-size: 18px;
+
+    letter-spacing: 4px;
+}
+
+/* =====================================================
+   MAIN WEBSITE
+   ===================================================== */
+
+.site {
+    position: relative;
+
+    width: 100%;
+    max-width: none;
+
+    margin: 0;
+
+    background: #fdf8f4;
+
+    border: 6px solid #6b3f35;
+
+    box-shadow:
+        0 0 0 3px #e99bb8,
+        6px 6px 0 rgba(79, 55, 48, 0.25);
+
+    box-sizing: border-box;
+}
+
+
+/* =====================================================
+   THREE COLUMN LAYOUT
+   ===================================================== */
+
+.layout {
+    display: grid;
+
+    grid-template-columns:
+        250px
+        minmax(0, 1fr)
+        250px;
+
+    gap: 12px;
+
+    padding: 25px 20px;
+
+    /* background DI BELAKANG 3 COLUMN */
+    background-color: #fdf7f0;
+
+    background-image:
+        linear-gradient(
+            rgba(2, 4, 3, 0.12) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(38, 77, 75, 0.12) 1px,
+            transparent 1px
+        );
+
+    background-size:
+        18px 18px;
+
+    position: relative;
+}
+
+.layout::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    bottom: 0;
+    left: 0;
+
+    width: 280px;
+
+    background-color: #c5e5e2;
+
+    background-image:
+        radial-gradient(
+            rgba(232, 148, 176, 0.75) 2px,
+            transparent 2px
+        );
+
+    background-size: 13px 13px;
+
+    border-right: 3px solid #70463c;
+
+    pointer-events: none;
+
+    z-index: 0;
+}
+/* =====================================================
+   BOXES
+   ===================================================== */
+
+.box {
+
+    position: relative;
+
+    margin-bottom: 12px;
+
+    padding: 11px;
+
+    background: #fffaf7;
+
+    border: 3px solid #70463c;
+
+    box-shadow:
+        3px 3px 0 #e6a3b9;
+}
+
+
+/* BOX TITLE */
+
+.box h2 {
+    margin: 0 0 8px;
+    padding: 6px 5px;
+
+    font-size: 13px;
+    text-align: center;
+
+    color: #70463c;
+
+    /* cute pink gingham */
+    background:
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.45) 50%,
+            transparent 50%
+        ),
+        linear-gradient(
+            rgba(255,255,255,.45) 50%,
+            transparent 50%
+        ),
+        #efb4c8;
+
+    background-size: 12px 12px;
+
+    border: 2px solid #70463c;
+
+    box-shadow:
+        2px 2px 0 #d995ad;
+}
+
+
+/* =====================================================
+   PROFILE
+   ===================================================== */
+
+
+
+
+/* =====================================================
+   LINKS
+   ===================================================== */
+
+nav a {
+
+    display: block;
+
+    margin: 5px 0;
+
+    padding: 5px 7px;
+
+    color: #70463c;
+
+    background: #f6c2d4;
+
+    border: 2px solid #70463c;
+
+    text-decoration: none;
+
+    font-weight: bold;
+}
+
+nav a:hover {
+
+    color: #fff;
+
+    background: #378f8b;
+
+    transform: translateX(3px);
+}
+
+
+/* =====================================================
+   MAIN CONTENT
+   ===================================================== */
+
+.hero {
+
+    text-align: center;
+
+    background:
+        #fffaf7;
+}
+
+.hero h1 {
+
+    color: #378f8b;
+
+    font-family: Georgia, serif;
+
+    font-size: 25px;
+
+    text-shadow:
+        2px 2px 0 #f2b2c9;
+}
+
+
+/* ===== UPDATE LOG ===== */
+
+.update-log h2 {
+    margin-bottom: 8px;
+}
+
+.update-entry {
+    padding: 4px 2px;
+    border-bottom: 1px dotted #e894b0;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.update-entry:last-child {
+    border-bottom: none;
+}
+
+.update-date {
+    display: inline-block;
+    color: #70463c;
+    font-size: 10px;
+    font-weight: bold;
+    background: #f8dce5;
+    padding: 1px 4px;
+    margin-bottom: 1px;
+}
+
+.update-entry p {
+    margin: 1px 0 0;
+}
+
+
+
+
+
+/* =====================================================
+   CURRENTLY
+   ===================================================== */
+
+.currently p {
+
+    margin: 8px 0;
+
+    padding: 5px;
+
+    background: #e3f3f1;
+
+    border-bottom: 1px dotted #9a6a5d;
+}
+
+
+/* =====================================================
+   AFFILIATES
+   ===================================================== */
+
+.affiliate {
+
+    margin: 7px 0;
+
+    padding: 8px;
+
+    color: #fff;
+
+    background: #378f8b;
+
+    border: 2px solid #70463c;
+
+    text-align: center;
+
+    font-size: 11px;
+}
+
+.affiliate:hover {
+
+    background: #e69ab6;
+}
+
+
+/* =====================================================
+   FOOTER
+   ===================================================== */
+
+footer {
+
+    padding: 20px;
+
+    text-align: center;
+
+    color: #fff;
+
+    background: #70463c;
+
+    border-top: 5px solid #e6a1ba;
+}
+
+footer p {
+
+    margin: 5px;
+}
+
+footer .small {
+
+    font-size: 10px;
+
+    color: #f6cbd8;
+}
+
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media (max-width: 800px) {
+
+    .site {
+        max-width: 94%;
+    }
+
+    .layout {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .header {
+        padding: 20px 10px;
+    }
+
+    .logo {
+        font-size: 24px;
+    }
+}
+
+/* =====================================================
+   LACE FRAME
+   ===================================================== */
+
+.site::before,
+.site::after {
+    content: "";
+
+    position: absolute;
+
+    pointer-events: none;
+
+    z-index: 20;
+}
+
+
+/* =========================================
+   SIDEBAR Y2K CALENDAR
+   ========================================= */
+
+/* month */
+
+.calendar-header {
+    display: grid;
+    grid-template-columns: 22px 1fr 22px;
+
+    align-items: center;
+
+    margin-bottom: 3px;
+
+    border: 1px solid #70463c;
+
+    background:
+        repeating-linear-gradient(
+            90deg,
+            #f3bfd0 0px,
+            #f3bfd0 5px,
+            #fff8f8 5px,
+            #fff8f8 10px
+        );
+
+    color: #70463c;
+
+    font-family: Georgia, serif;
+
+    font-size: 9px;
+
+    font-weight: bold;
+
+    text-align: center;
+}
+
+
+.calendar-header button {
+    width: 22px;
+    height: 21px;
+
+    padding: 0;
+
+    border: 0;
+
+    background: #4c3313;
+
+    color: white;
+
+    font-size: 7px;
+
+    cursor: pointer;
+}
+
+
+.calendar-header button:hover {
+    background: #e69ab6;
+}
+
+
+/* weekday */
+
+.calendar-weekdays {
+    display: grid;
+
+    grid-template-columns: repeat(7, 1fr);
+
+    gap: 1px;
+
+    margin-bottom: 1px;
+}
+
+
+.calendar-weekdays span {
+    padding: 3px 0;
+
+    background: #fa7bb5;
+
+    border: 1px solid #70463c;
+
+    color: white;
+
+    text-align: center;
+
+    font-family: Georgia, serif;
+
+    font-size: 11px;
+
+    font-weight: bold;
+}
+
+
+/* days */
+
+.calendar-days {
+    display: grid;
+
+    grid-template-columns: repeat(7, 1fr);
+
+    gap: 1px;
+}
+
+
+.calendar-day {
+    min-height: 34px !important;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #fffaf7;
+    border: 1px dotted #d68ca9;
+    color: #70463c;
+    font-size: 10px;
+    cursor: pointer;
+}
+
+
+/* subtle alternating squares */
+
+.calendar-day:nth-child(even) {
+    background: #f4faf9;
+}
+
+
+.calendar-day:hover {
+    background: #f4b6cb;
+
+    color: white;
+}
+
+
+/* empty */
+
+.calendar-day.empty {
+    background: #faf7f4;
+
+    border-color: #eee3df;
+
+    cursor: default;
+}
+
+.calendar-day.empty:hover {
+    background: #faf7f4;
+}
+
+
+/* today */
+
+.calendar-day.today {
+    background: #6c411e;
+
+    color: white;
+
+    border: 2px solid #70463c;
+
+    font-weight: bold;
+}
+
+
+/* selected */
+
+.calendar-day.selected {
+    background: #e69ab6;
+
+    color: white;
+
+    border: 2px solid #70463c;
+
+    font-weight: bold;
+}
+
+
+/* selected message */
+
+.calendar-note {
+    margin-top: 4px;
+
+    padding: 4px 2px;
+
+    min-height: 20px;
+
+    background:
+        repeating-linear-gradient(
+            45deg,
+            #fff8f8 0px,
+            #fff8f8 4px,
+            #f8e9ee 4px,
+            #f8e9ee 8px
+        );
+
+    border: 1px dotted #d68ca9;
+
+    color: #70463c;
+
+    font-size: 7px;
+
+    text-align: center;
+}
+
+/* ===== ROSE TOP NAV ===== */
+
+nav.top-nav {
+    width: 100%;
+    height: 43px;
+
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 4px;
+    padding: 4px 6px;
+    margin: 0;
+
+    box-sizing: border-box;
+
+    /* pink + white polkadot */
+    background-color: #fff8fb;
+    background-image: radial-gradient(
+        #f3a9c1 2px,
+        transparent 2px
+    );
+    background-size: 12px 12px;
+    border-top: 2px solid #70463c;
+    border-bottom: 3px solid #70463c;
+}
+
+nav.top-nav a {
+    flex: 0 0 84px !important;
+
+    width: 84px;
+    height: 30px;
+
+    display: block !important;
+
+    padding: 0;
+    margin: 0;
+
+    background: transparent url("../images/blank-button-rose.png") no-repeat center;
+    background-size: 84px 30px;
+
+    border: none;
+    outline: none;
+    box-shadow: none;
+
+    color: #70463c;
+    font-family: Georgia, serif;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 37px;
+    text-align: center;
+    text-decoration: none;
+
+    text-shadow: 1px 1px 0 #fff;
+}
+
+nav.top-nav a:hover {
+    transform: translateY(-2px);
+    color: #378f8b;
+}
+
+/* ===== TO DO LIST ===== */
+
+.todo-box {
+    padding: 7px;
+}
+
+.todo-input {
+    display: flex;
+    gap: 3px;
+    margin-bottom: 7px;
+}
+
+.todo-input input {
+    min-width: 0;
+    flex: 1;
+
+    padding: 5px;
+    box-sizing: border-box;
+
+    background: #fffdfd;
+    border: 1px solid #d995ad;
+
+    color: #70463c;
+    font-family: Georgia, serif;
+    font-size: 11px;
+}
+
+.todo-input input:focus {
+    outline: none;
+    border-color: #378f8b;
+    background: #fff8fb;
+}
+
+.todo-input button {
+    width: 24px;
+    border: 1px solid #70463c;
+
+    background: #e9a6bd;
+    color: white;
+
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.todo-input button:hover {
+    background: #378f8b;
+}
+
+#todoList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.todo-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    margin-bottom: 4px;
+    padding: 4px;
+
+    background:
+        radial-gradient(#f2b5c9 1px, transparent 1px);
+    background-size: 7px 7px;
+
+    border: 1px dotted #d995ad;
+
+    color: #70463c;
+    font-size: 13px;
+}
+
+.todo-check {
+    width: 13px;
+    height: 13px;
+    margin: 0;
+    accent-color: #e69ab6;
+    cursor: pointer;
+}
+
+.todo-text {
+    flex: 1;
+    word-break: break-word;
+}
+
+.todo-item.done .todo-text {
+    text-decoration: line-through;
+    opacity: 0.5;
+}
+
+.todo-delete {
+    border: none;
+    background: transparent;
+    color: #d47799;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.todo-delete:hover {
+    color: #70463c;
+}
+
+.todo-count {
+    margin-top: 6px;
+    padding: 4px;
+
+    background: #dff1ed;
+    border: 1px dotted #70aaa4;
+
+    color: #70463c;
+    font-size: 11px;
+    text-align: center;
+}
+
+/* ===== MY SCHEDULE ===== */
+
+.schedule-box {
+    padding: 7px;
+}
+
+/* Week navigation */
+.schedule-nav {
+    display: grid;
+    grid-template-columns: 24px 1fr 24px;
+    align-items: center;
+
+    margin-bottom: 6px;
+
+    border: 1px solid #70463c;
+    background:
+        radial-gradient(#f3a9c1 2px, transparent 2px);
+    background-size: 10px 10px;
+
+    text-align: center;
+}
+
+.schedule-nav button {
+    width: 24px;
+    height: 23px;
+
+    padding: 0;
+    border: none;
+
+    background: #378f8b;
+    color: white;
+
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.schedule-nav button:hover {
+    background: #e69ab6;
+}
+
+#weekTitle {
+    color: #70463c;
+    font-family: Georgia, serif;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+/* Schedule days */
+.schedule {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.schedule-day {
+    display: grid;
+    grid-template-columns: 38px 1fr;
+
+    border: 1px dotted #d995ad;
+    background: #fffdfd;
+}
+
+.schedule-day-name {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #dff1ed;
+    border-right: 1px solid #70aaa4;
+
+    color: #70463c;
+    font-family: Georgia, serif;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.schedule-events {
+    padding: 3px;
+    min-height: 22px;
+}
+
+/* Individual event */
+.schedule-event {
+    display: flex;
+    align-items: center;
+
+    margin-bottom: 2px;
+    padding: 3px;
+
+    background: #fff4f8;
+    border: 1px dotted #e69ab6;
+
+    color: #70463c;
+    font-size: 13px;
+}
+
+.schedule-event:last-child {
+    margin-bottom: 0;
+}
+
+.schedule-time {
+    min-width: 35px;
+
+    color: #378f8b;
+    font-weight: bold;
+}
+
+.schedule-task {
+    flex: 1;
+}
+
+/* Add schedule */
+.schedule-add {
+    display: grid;
+    grid-template-columns: 55px 1fr 45px 24px;
+    gap: 3px;
+
+    margin-top: 7px;
+}
+
+.schedule-add input,
+.schedule-add select {
+    width: 100%;
+    min-width: 0;
+
+    padding: 4px;
+    box-sizing: border-box;
+
+    border: 1px solid #d995ad;
+    background: #fffdfd;
+
+    color: #70463c;
+    font-family: Georgia, serif;
+    font-size: 13px;
+}
+
+.schedule-add input:focus,
+.schedule-add select:focus {
+    outline: none;
+    border-color: #378f8b;
+}
+
+.schedule-add button {
+    width: 24px;
+    padding: 0;
+
+    border: 1px solid #70463c;
+    background: #e69ab6;
+
+    color: white;
+    font-size: 13px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.schedule-add button:hover {
+    background: #378f8b;
+}
+
+/* ===== CUSTOM CURSORS ===== */
+
+/* Cursor utama: rose */
+html,
+body {
+    cursor: url("../images/rose-cursor-valid.cur"), auto;
+}
+
+/* Cursor pen untuk semua interactive elements */
+a,
+button,
+input,
+select,
+textarea,
+input[type="checkbox"],
+.calendar-day,
+.todo-item,
+.schedule-event {
+    cursor: url("../images/pen-cursor.cur"), pointer;
+}
+
+/* ===== STRAWBERRY CREAM DIVIDER ===== */
+
+.strawberry-divider {
+    width: 100%;
+    height: 45px;
+
+    display: flex;
+    align-items: center;
+
+    overflow: hidden;
+
+    background: transparent;
+    border: none;
+    box-shadow: none;
+
+    /* repeat gambar */
+    background-image: url("../images/strawberry-cream,png.webp");
+    background-repeat: repeat-x;
+    background-position: center;
+    background-size: auto 38px;
+}
+
+.strawberry-divider img {
+    display: none;
+}
+
+/* ===== SIDEBAR IMAGE FIX ===== */
+
+.side-images {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 5px !important;
+    width: 100% !important;
+    margin: 12px 0 !important;
+    padding: 0 !important;
+    position: relative !important;
+    z-index: 9999 !important;
+}
+
+/* ===== SIDEBAR IMAGES ===== */
+
+.side-images {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    width: 100%;
+    margin: 12px 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.side-images img {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    height: auto !important;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.side-images img:first-child {
+    width: 30% !important;
+}
+
+.side-images img:last-child {
+    width: 70% !important;
+}
+
+.cinammon-banner {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    margin: 8px 0 12px !important;
+    position: relative !important;
+    z-index: 9999;
+}
+
+.mp3-decor {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    margin: 12px 0;
+    padding: 0;
+    position: relative !important;
+    z-index: 9999;
+}
+
+.elouaint {
+    display: block !important;
+    width: 135px !important;
+    height: auto !important;
+    margin: 12px 0;
+    padding: 0;
+    position: relative !important;
+    z-index: 9999;
+}
+
+.right-decor {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    width: 100%;
+    margin: 12px 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.right-decor img {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    height: auto !important;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.right-decor img:first-child {
+    width: 40% !important;
+}
+
+.right-decor img:last-child {
+    width: 60% !important;
+}
+
+/* ===== HEADER TITLE ===== */
+
+.site-header {
+    position: relative;
+    text-align: left;
+    padding: 25px 20px 18px;
+    overflow: hidden;
+}
+
+.title-row {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+.title-row h1 {
+    margin: 0 !important;
+    font-family: "Cookiemonster", cursive !important;
+    font-size: 73px;
+    text-align: left !important;
+    color: #d47799;
+}
+
+.smiwing-title {
+    display: block !important;
+    width: 700px !important;
+    height: auto !important;
+    margin: 0 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.welcome-text {
+    margin: 10px 0 0 !important;
+    text-align: left !important;
+}
+
+.calendar {
+    height: 250px !important;
+}
+
+/* ===== MAKE CALENDAR TALLER ===== */
+
+.calendar-table th {
+    height: 28px !important;
+}
+
+.calendar table td {
+    height: 38px !important;
+}
+

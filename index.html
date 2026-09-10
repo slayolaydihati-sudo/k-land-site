@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>♡ KYland ♡</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&display=swap"
+        rel="stylesheet"
+    >
+</head>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const calendarDays = document.getElementById("calendarDays");
+    const monthYear = document.getElementById("monthYear");
+    const calendarNote = document.getElementById("calendarNote");
+
+    const prevMonth = document.getElementById("prevMonth");
+    const nextMonth = document.getElementById("nextMonth");
+
+    let currentDate = new Date();
+    let selectedDate = null;
+
+
+    function renderCalendar() {
+
+        // clear previous dates
+        calendarDays.innerHTML = "";
+
+        const year = currentDate.getFullYear();
+        const month = currentDate.getMonth();
+
+        // first weekday of month
+        const firstDay =
+            new Date(year, month, 1).getDay();
+
+        // number of days in month
+        const daysInMonth =
+            new Date(year, month + 1, 0).getDate();
+
+
+        // month title
+        const monthName =
+            currentDate.toLocaleString("en-US", {
+                month: "long"
+            });
+
+        monthYear.textContent =
+            monthName + " " + year;
+
+
+        // empty spaces before day 1
+        for (let i = 0; i < firstDay; i++) {
+
+            const emptyDay =
+                document.createElement("div");
+
+            emptyDay.className =
+                "calendar-day empty";
+
+            calendarDays.appendChild(emptyDay);
+        }
+
+
+        // create dates
+        for (let day = 1; day <= daysInMonth; day++) {
+
+            const dateElement =
+                document.createElement("div");
+
+            dateElement.className =
+                "calendar-day";
+
+            dateElement.textContent = day;
+
+
+            // today's date
+            const today = new Date();
+
+            if (
+                day === today.getDate() &&
+                month === today.getMonth() &&
+                year === today.getFullYear()
+            ) {
+
+                dateElement.classList.add("today");
+            }
+
+
+            // selected date
+            if (
+                selectedDate &&
+                selectedDate.day === day &&
+                selectedDate.month === month &&
+                selectedDate.year === year
+            ) {
+
+                dateElement.classList.add("selected");
+            }
+
+
+            // click date
+            dateElement.addEventListener("click", function () {
+
+                selectedDate = {
+                    day: day,
+                    month: month,
+                    year: year
+                };
+
+                calendarNote.textContent =
+                    "♡ " + monthName + " " + day + " ♡";
+
+                renderCalendar();
+            });
+
+
+            calendarDays.appendChild(dateElement);
+        }
+    }
+
+
+    // previous month
+    prevMonth.addEventListener("click", function () {
+
+        currentDate.setMonth(
+            currentDate.getMonth() - 1
+        );
+
+        selectedDate = null;
+
+        calendarNote.textContent =
+            "♡ pick a day ♡";
+
+        renderCalendar();
+    });
+
+
+    // next month
+    nextMonth.addEventListener("click", function () {
+
+        currentDate.setMonth(
+            currentDate.getMonth() + 1
+        );
+
+        selectedDate = null;
+
+        calendarNote.textContent =
+            "♡ pick a day ♡";
+
+        renderCalendar();
+    });
+
+
+    // first render
+    renderCalendar();
+
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const input = document.getElementById("todoInput");
+    const addButton = document.getElementById("addTodo");
+    const list = document.getElementById("todoList");
+    const count = document.getElementById("todoCount");
+
+    let todos = JSON.parse(localStorage.getItem("purinTodos")) || [];
+
+    function saveTodos() {
+        localStorage.setItem("purinTodos", JSON.stringify(todos));
+    }
+
+    function renderTodos() {
+        list.innerHTML = "";
+
+        todos.forEach(function (todo, index) {
+
+            const li = document.createElement("li");
+            li.className = "todo-item";
+
+            if (todo.done) {
+                li.classList.add("done");
+            }
+
+            const checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.className = "todo-check";
+            checkbox.checked = todo.done;
+
+            checkbox.addEventListener("change", function () {
+                todos[index].done = checkbox.checked;
+                saveTodos();
+                renderTodos();
+            });
+
+            const text = document.createElement("span");
+            text.className = "todo-text";
+            text.textContent = todo.text;
+
+            const deleteButton = document.createElement("button");
+            deleteButton.className = "todo-delete";
+            deleteButton.textContent = "×";
+
+            deleteButton.addEventListener("click", function () {
+                todos.splice(index, 1);
+                saveTodos();
+                renderTodos();
+            });
+
+            li.appendChild(checkbox);
+            li.appendChild(text);
+            li.appendChild(deleteButton);
+
+            list.appendChild(li);
+        });
+
+        const remaining = todos.filter(todo => !todo.done).length;
+
+        count.textContent = "♡ " + remaining + " tasks left ♡";
+    }
+
+    function addTodo() {
+        const text = input.value.trim();
+
+        if (text === "") return;
+
+        todos.push({
+            text: text,
+            done: false
+        });
+
+        saveTodos();
+        renderTodos();
+
+        input.value = "";
+        input.focus();
+    }
+
+    addButton.addEventListener("click", addTodo);
+
+    input.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+            addTodo();
+        }
+    });
+
+    renderTodos();
+});
+
+// ===== INTERACTIVE SCHEDULE =====
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const prevWeek = document.getElementById("prevWeek");
+    const nextWeek = document.getElementById("nextWeek");
+    const weekTitle = document.getElementById("weekTitle");
+
+    const scheduleTime = document.getElementById("scheduleTime");
+    const scheduleTask = document.getElementById("scheduleTask");
+    const scheduleDay = document.getElementById("scheduleDay");
+    const addSchedule = document.getElementById("addSchedule");
+
+    // Ambil schedule yang tersimpan
+    let schedules =
+        JSON.parse(localStorage.getItem("purinSchedule")) || [];
+
+    let currentWeek = 0;
+
+
+    // =========================
+    // WEEK TITLE
+    // =========================
+
+    function updateWeekTitle() {
+
+        if (currentWeek === 0) {
+            weekTitle.textContent = "♡ This Week ♡";
+        } 
+        else if (currentWeek === -1) {
+            weekTitle.textContent = "♡ Last Week ♡";
+        } 
+        else if (currentWeek === 1) {
+            weekTitle.textContent = "♡ Next Week ♡";
+        } 
+        else if (currentWeek < 0) {
+            weekTitle.textContent =
+                "♡ " + Math.abs(currentWeek) + " Weeks Ago ♡";
+        } 
+        else {
+            weekTitle.textContent =
+                "♡ In " + currentWeek + " Weeks ♡";
+        }
+    }
+
+
+    // =========================
+    // ADD SCHEDULE
+    // =========================
+
+    function addNewSchedule() {
+
+        const time = scheduleTime.value;
+        const task = scheduleTask.value.trim();
+        const day = scheduleDay.value;
+
+        // Jangan tambah kalau kosong
+        if (time === "" || task === "") {
+            alert("♡ Please enter a time and task! ♡");
+            return;
+        }
+
+        schedules.push({
+            id: Date.now(),
+            week: currentWeek,
+            day: day,
+            time: time,
+            task: task
+        });
+
+        localStorage.setItem(
+            "purinSchedule",
+            JSON.stringify(schedules)
+        );
+
+        scheduleTime.value = "";
+        scheduleTask.value = "";
+
+        renderSchedules();
+    }
+
+
+    // =========================
+    // DISPLAY SCHEDULE
+    // =========================
+
+    function renderSchedules() {
+
+        const days = [
+            "monday",
+            "tuesday",
+            "wednesday",
+            "thursday",
+            "friday",
+            "saturday",
+            "sunday"
+        ];
+
+        days.forEach(function (day) {
+
+            const container =
+                document.getElementById(day);
+
+            if (!container) return;
+
+            container.innerHTML = "";
+
+            const daySchedules = schedules
+                .filter(function (item) {
+                    return (
+                        item.day === day &&
+                        item.week === currentWeek
+                    );
+                })
+                .sort(function (a, b) {
+                    return a.time.localeCompare(b.time);
+                });
+
+
+            daySchedules.forEach(function (item) {
+
+                const event = document.createElement("div");
+
+                event.className = "schedule-event";
+
+                event.innerHTML = `
+                    <span class="schedule-time">
+                        ${item.time}
+                    </span>
+
+                    <span class="schedule-task">
+                        ${item.task}
+                    </span>
+
+                    <button
+                        class="schedule-delete"
+                        data-id="${item.id}"
+                        type="button"
+                    >
+                        ×
+                    </button>
+                `;
+
+                container.appendChild(event);
+            });
+        });
+
+
+        // Delete buttons
+        document
+            .querySelectorAll(".schedule-delete")
+            .forEach(function (button) {
+
+                button.addEventListener("click", function () {
+
+                    const id =
+                        Number(button.dataset.id);
+
+                    schedules =
+                        schedules.filter(function (item) {
+                            return item.id !== id;
+                        });
+
+                    localStorage.setItem(
+                        "purinSchedule",
+                        JSON.stringify(schedules)
+                    );
+
+                    renderSchedules();
+                });
+            });
+    }
+
+
+    // =========================
+    // PREVIOUS WEEK
+    // =========================
+
+    prevWeek.addEventListener("click", function () {
+
+        currentWeek--;
+
+        updateWeekTitle();
+        renderSchedules();
+    });
+
+
+    // =========================
+    // NEXT WEEK
+    // =========================
+
+    nextWeek.addEventListener("click", function () {
+
+        currentWeek++;
+
+        updateWeekTitle();
+        renderSchedules();
+    });
+
+
+    // =========================
+    // ADD BUTTON
+    // =========================
+
+    addSchedule.addEventListener(
+        "click",
+        addNewSchedule
+    );
+
+
+    // Enter = add
+    scheduleTask.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (event.key === "Enter") {
+                addNewSchedule();
+            }
+
+        }
+    );
+
+
+    // Initial
+    updateWeekTitle();
+    renderSchedules();
+
+});
+</script>
+
+<body>
+
+   <div class="lace-frame">
+
+        <!-- lace -->
+        <div class="lace-top"></div>
+        <div class="lace-bottom"></div>
+        <div class="lace-left"></div>
+        <div class="lace-right"></div>
+
+        <div class="lace-corner lace-tl"></div>
+        <div class="lace-corner lace-tr"></div>
+        <div class="lace-corner lace-bl"></div>
+        <div class="lace-corner lace-br"></div>
+
+
+        <!-- SEMUA WEBSITE DI SINI -->
+        <div class="website">
+
+        <div class="site">
+
+        <header class="header">
+                            
+             <div class="title-row">
+                <h1>𓊆KYland𓊇</h1>
+                <img src="images/smiwing.png" alt="" class="smiwing-title">
+            </div>
+
+   
+            <p class="welcome-text">
+                welcome to my tiny corner of the internet ♡
+            </p>
+
+            
+        </header>
+
+       
+        <!-- HORIZONTAL NAVIGATION -->
+        <nav class="top-nav">
+
+            <a href="index.html">♡ index ♡</a>
+
+            <a href="about.html">♡ about me ♡</a>
+
+            <a href="diary.html">♡ diary ♡</a>
+
+            <a href="gallery.html">♡ gallery ♡</a>
+
+            <a href="projects.html">♡ projects ♡</a>
+
+            <a href="links.html">♡ links ♡</a>
+
+        </nav>
+
+        <div class="strawberry-divider"></div>
+
+            <!-- THREE COLUMN LAYOUT -->
+            <div class="layout">
+
+
+                <!-- LEFT SIDEBAR -->
+                <aside class="sidebar left">
+
+                    <section class="box profile">
+                        <h2>♡ profile</h2>
+
+                      
+                        <p>hello! i am <b>K</b> ♡</p>
+                        <p>Feeling: 🌸 helpless</p>
+                        <p>Status: online!</p>
+                    </section>
+
+                    <section class="box">
+                        <h2>♡ currently</h2>
+
+                        <p>🎧 listening: </p>
+                        <p>📖 reading: </p>
+                        <p>🍮 eating: /p>
+                    </section>
+
+                   <div class="side-images">
+                        <img src="images/parfait.png" alt="parfait">
+                        <img src="images/swirl.jpg" alt="swirl">
+                    </div>
+
+                    <img
+                        src="images/cinammon.gif"
+                        alt="Cinnamoroll"
+                        class="cinammon-banner"
+                        style="display:block !important; visibility:visible !important; opacity:1 !important;"
+                    >
+                    <img src="images/mp3.gif" alt="" class="mp3-decor" style="display:block !important; visibility:visible !important; opacity:1 !important;">
+                    <img
+                        src="images/elouaint-download.gif"
+                        alt=""
+                        class="elouaint"
+                        style="display:block !important; visibility:visible !important; opacity:1 !important;"
+                    >
+                </aside>
+
+                
+                <!-- MAIN -->
+                <main class="content">
+
+                    <section class="box hero">
+
+                        <img
+                            src="images/welcome-pink.gif"
+                            alt="welcome"
+                            class="welcome-gif"
+                        >
+
+                       
+                        <p>
+                            this is my personal corner on the internet
+                            where i keep my diary, pictures, favorite things,
+                            and random little thoughts.
+                        </p>
+
+                        <div class="blink">
+                            ✧･ﾟ: *✧･ﾟ:* welcome *:･ﾟ✧*:･ﾟ✧
+                        </div>
+
+                    </section>
+
+
+                    <section class="box">
+
+                        <h2>♡ about me</h2>
+
+                        <p>
+                            Hi!! I'm <b>K</b>.
+                        </p>
+
+                        <p>
+                            I made this website because I wanted to try new things
+                        </p>
+
+                    </section>
+
+
+                    <section class="box update-log">
+                        <h2>♡ update log ♡</h2>
+
+                        <div class="update-entry">
+                            <span class="update-date">09.09.26 21:39</span>
+                            <p>kata gw bubarin aja elfest</p>
+                        </div>
+
+                        <div class="update-entry">
+                            <span class="update-date">09.09.26 21:39</span>
+                            <p>fuck this shi im done</p>
+                        </div>
+
+                        <div class="update-entry">
+                            <span class="update-date">09.09.26 21:39</span>
+                            <p>working on the layout...</p>
+                        </div>
+                    </section>
+
+                    <section class="box calendar-box">
+
+                       
+
+                        <div class="calendar">
+
+                            <div class="calendar-header">
+
+                                <button id="prevMonth" type="button">◀</button>
+
+                                <span id="monthYear"></span>
+
+                                <button id="nextMonth" type="button">▶</button>
+
+                            </div>
+
+
+                            <div class="calendar-weekdays">
+                                <span>日</span>
+                                <span>月</span>
+                                <span>火</span>
+                                <span>水</span>
+                                <span>木</span>
+                                <span>金</span>
+                                <span>土</span>
+                            </div>
+
+
+                            <div
+                                class="calendar-days"
+                                id="calendarDays">
+                            </div>
+
+
+                            <div
+                                class="calendar-note"
+                                id="calendarNote">
+                                ♡ pick a day ♡
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                                       
+                </main>
+
+
+
+                <!-- RIGHT SIDEBAR -->
+                <aside class="sidebar right">
+
+                    
+                    <section class="box">
+
+                        <h2>♡ affiliates</h2>
+
+                        <a href="#">
+                            <div class="affiliate">
+                                ♡ cute site ♡
+                            </div>
+                        </a>
+
+                        <a href="#">
+                            <div class="affiliate">
+                                ♡ my friend ♡
+                            </div>
+                        </a>
+
+                    </section>
+
+
+                    <section class="box todo-box">
+                        <h2>♡ To-Do List ♡</h2>
+
+                        <div class="todo-input">
+                            <input
+                                type="text"
+                                id="todoInput"
+                                placeholder="new task..."
+                                maxlength="45"
+                            >
+                            <button id="addTodo">+</button>
+                        </div>
+
+                        <ul id="todoList"></ul>
+
+                        <div class="todo-count" id="todoCount">
+                            ♡ 0 tasks ♡
+                        </div>
+                    </section>
+
+                    <div class="right-decor">
+                        <img src="images/gyaru-rain.gif" alt="">
+                        <img src="images/cappucino.png" alt="">
+                    </div>
+
+                        
+
+                    <section class="box schedule-box">
+
+                        <!-- Week Navigation -->
+                        <div class="schedule-nav">
+                            <button id="prevWeek" type="button">◀</button>
+
+                            <span id="weekTitle">This Week</span>
+
+                            <button id="nextWeek" type="button">▶</button>
+                        </div>
+
+                        <!-- Schedule -->
+                        <div class="schedule">
+
+                            <!-- Monday -->
+                            <div class="schedule-day">
+                                <div class="schedule-day-name">MON</div>
+
+                                <div class="schedule-events" id="monday">
+                                    <div class="schedule-event">
+                                        <span class="schedule-time">09:00</span>
+                                        <span class="schedule-task">study</span>
+                                    </div>
+
+                                    <div class="schedule-event">
+                                        <span class="schedule-time">13:00</span>
+                                        <span class="schedule-task">lunch</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Tuesday -->
+                            <div class="schedule-day">
+                                <div class="schedule-day-name">TUE</div>
+
+                                <div class="schedule-events" id="tuesday">
+                                    <div class="schedule-event">
+                                        <span class="schedule-time">10:00</span>
+                                        <span class="schedule-task">work on project</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Wednesday -->
+                            <div class="schedule-day">
+                                <div class="schedule-day-name">WED</div>
+
+                                <div class="schedule-events" id="wednesday">
+                                    <div class="schedule-event">
+                                        <span class="schedule-time">09:00</span>
+                                        <span class="schedule-task">class</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Thursday -->
+                            <div class="schedule-day">
+                                <div class="schedule-day-name">THU</div>
+
+                                <div class="schedule-events" id="thursday">
+                                </div>
+                            </div>
+
+                            <!-- Friday -->
+                            <div class="schedule-day">
+                                <div class="schedule-day-name">FRI</div>
+
+                                <div class="schedule-events" id="friday">
+                                    <div class="schedule-event">
+                                        <span class="schedule-time">19:00</span>
+                                        <span class="schedule-task">movie night ♡</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Saturday -->
+                            <div class="schedule-day">
+                                <div class="schedule-day-name">SAT</div>
+
+                                <div class="schedule-events" id="saturday">
+                                </div>
+                            </div>
+
+                            <!-- Sunday -->
+                            <div class="schedule-day">
+                                <div class="schedule-day-name">SUN</div>
+
+                                <div class="schedule-events" id="sunday">
+                                    <div class="schedule-event">
+                                        <span class="schedule-time">10:00</span>
+                                        <span class="schedule-task">lazy day ♡</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Add Schedule -->
+                        <div class="schedule-add">
+
+                            <input
+                                type="time"
+                                id="scheduleTime"
+                            >
+
+                            <input
+                                type="text"
+                                id="scheduleTask"
+                                placeholder="new schedule..."
+                                maxlength="40"
+                            >
+
+                            <select id="scheduleDay">
+                                <option value="monday">MON</option>
+                                <option value="tuesday">TUE</option>
+                                <option value="wednesday">WED</option>
+                                <option value="thursday">THU</option>
+                                <option value="friday">FRI</option>
+                                <option value="saturday">SAT</option>
+                                <option value="sunday">SUN</option>
+                            </select>
+
+                            <button id="addSchedule" type="button">
+                                +
+                            </button>
+
+                        </div>
+
+                    </section>
+
+                    
+
+                </aside>
+
+            </div>
+
+            <div class="strawberry-divider"></div>
+
+
+            <!-- FOOTER -->
+            <footer>
+
+                <p>
+                    ♡ thank you for visiting my little website ♡
+                </p>
+
+                <p>
+                    index | diary | gallery | guestbook
+                </p>
+
+                <p class="small">
+                    hosted with love on the internet ♡
+                </p>
+
+            </footer>
+
+    </div>
+
+
+        <script src="script.js"></script>
+
+</body>
+</html>
